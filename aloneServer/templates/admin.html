@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Authorization Process</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        $(function () {
+            $("button#TwitStart").click(function () {
+                $.ajax({
+                    url: "twit",
+                    type: "POST",
+                    data: {
+                        "Key": $("input[name='key']").val().trim()
+                    },
+                    success: function (a) {
+                        $("p#Twit_is_alive").text(a);
+                    },
+                    error: function (f) {
+                        if (f.status === 401)
+                            alert("Check Your Key.");
+                        else if (f.status === 403)
+                            alert("Access Denied.");
+                        else if (f.status === 423)
+                            alert("Already Detecting.");
+                        else
+                            alert("Unexpected Error.");
+                    }
+                });
+            });
+            $("button#WebStart").click(function () {
+                $.ajax({
+                    url: "web",
+                    type: "POST",
+                    data: {
+                        "Key": $("input[name='key']").val().trim()
+                    },
+                    success: function (a) {
+                        $("p#Web_is_alive").text(a);
+                    },
+                    error: function (f) {
+                        if (f.status === 401)
+                            alert("Check Your Key.");
+                        else if (f.status === 403)
+                            alert("Access Denied.");
+                        else if (f.status === 423)
+                            alert("Already Detecting.");
+                        else
+                            alert("Unexpected Error.");
+                    }
+                });
+            });
+            $("button#KeyStart").click(function () {
+                $.ajax({
+                    url: "realKey",
+                    type: "POST",
+                    data: {
+                        "Key": $("input[name='key']").val().trim()
+                    },
+                    success: function (a) {
+                        $("p#Key_is_alive").text(a);
+                    },
+                    error: function (f) {
+                        if (f.status === 401)
+                            alert("Check Your Key.");
+                        else if (f.status === 403)
+                            alert("Access Denied.");
+                        else if (f.status === 423)
+                            alert("Already Detecting.");
+                        else
+                            alert("Unexpected Error.");
+                    }
+                });
+            });
+            $("button#NewsStart").click(function () {
+                $.ajax({
+                    url: "news",
+                    type: "POST",
+                    data: {
+                        "Key": $("input[name='key']").val().trim()
+                    },
+                    success: function (a) {
+                        $("p#NEWS_is_alive").text(a);
+                    },
+                    error: function (f) {
+                        if (f.status === 401)
+                            alert("Check Your Key.");
+                        else if (f.status === 403)
+                            alert("Access Denied.");
+                        else if (f.status === 423)
+                            alert("Already Detecting.");
+                        else
+                            alert("Unexpected Error.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <b>Detecting Server Admin</b><br /><br />
+    Insert Own Key : <input name="key"/>
+    <br /><hr />
+    <div>* Twit Detecting : <b><p id="Twit_is_alive">{{ twit }}</p></b> <button id="TwitStart">Start</button></div>
+    <br /><hr />
+    <div>* Web Detecting : <b><p id="Web_is_alive">{{ web }}</p></b> <button id="WebStart">Start</button></div>
+    <br /><hr />
+    <div>* Keyward Detecting : <b><p id="Key_is_alive">{{ keyword }}</p></b> <button id="KeyStart">Start</button></div>
+    <br /><hr />
+    <div>* News Detecting : <b><p id="NEWS_is_alive">{{ news }}</p></b> <button id="NewsStart">Start</button></div>
+</body>
+</html>
